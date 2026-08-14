@@ -4,6 +4,8 @@
 
 [🎬 Watch Demo Video](https://github.com/AyberkA0/furflux/blob/main/Screenshots/8.mp4)
 
+![Screenshot4](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/4.png)
+
 ## Compatibility
 
 PC Shell Fur targets Unity 6.3.21f1+ with URP 17.x. It is designed for desktop rendering APIs (DirectX 11/12, Vulkan, and Metal) and requires Shader Model 4.5-class GPU instancing. Mobile and WebGL are not supported.
@@ -68,8 +70,6 @@ If strands appear separated, first raise shell count; then increase thickness or
 **Visible bands/gaps:** raise the near portion of the Distance LOD Curve, increase Thickness, or reduce Fur Length.
 
 **Low frame rate:** reduce Fur Length, use a proxy mesh, use `BaseLayerOnly` shadows, and lower the Distance LOD Curve at medium and far ranges.
-
-![Screenshot4](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/4.png)
 
 ![Screenshot1](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/1.png)
 
