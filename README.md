@@ -1,8 +1,8 @@
 # FURFLUX - Shell Fur Shader for URP - Manual
 
-<video width="100%" height="auto" controls>
-  <source src="https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/8.mp4" type="video/mp4">
-</video>
+## Demo
+
+[🎬 Watch Demo Video](https://github.com/AyberkA0/furflux/blob/main/Screenshots/8.mp4)
 
 ## Compatibility
 
