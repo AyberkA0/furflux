@@ -1,6 +1,8 @@
 # FURFLUX - Shell Fur Shader for URP - Manual
 
-![Screenshot4](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/4.png)
+<video width="100%" height="auto" controls>
+  <source src="https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/8.mp4" type="video/mp4">
+</video>
 
 ## Compatibility
 
@@ -66,6 +68,8 @@ If strands appear separated, first raise shell count; then increase thickness or
 **Visible bands/gaps:** raise the near portion of the Distance LOD Curve, increase Thickness, or reduce Fur Length.
 
 **Low frame rate:** reduce Fur Length, use a proxy mesh, use `BaseLayerOnly` shadows, and lower the Distance LOD Curve at medium and far ranges.
+
+![Screenshot4](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/4.png)
 
 ![Screenshot1](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/1.png)
 
