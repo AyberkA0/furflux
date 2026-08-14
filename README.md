@@ -1,5 +1,11 @@
 # FURFLUX - Shell Fur Shader for URP - Manual
 
+## Screenshots
+
+![Screenshot1](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/1.png)
+![Screenshot1](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/3.png)
+![Screenshot1](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/5.png)
+
 ## Compatibility
 
 PC Shell Fur targets Unity 6.3.21f1+ with URP 17.x. It is designed for desktop rendering APIs (DirectX 11/12, Vulkan, and Metal) and requires Shader Model 4.5-class GPU instancing. Mobile and WebGL are not supported.
