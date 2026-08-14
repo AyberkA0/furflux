@@ -2,9 +2,9 @@
 
 ## Demo
 
-[🎬 Watch Demo Video](https://github.com/AyberkA0/furflux/blob/main/Screenshots/8.mp4)
-
 [![Watch Demo](https://img.shields.io/badge/▶_Watch_Demo-blue?style=for-the-badge)](https://github.com/AyberkA0/furflux/blob/main/Screenshots/8.mp4)
+
+[🎬 Watch Demo Video](https://github.com/AyberkA0/furflux/blob/main/Screenshots/8.mp4)
 
 ![Screenshot4](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/4.png)
 
