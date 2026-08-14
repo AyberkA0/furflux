@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: M_Fur_Demo_1
+  m_Shader: {fileID: 4800000, guid: 8dc2e348f11bcc049a88d80df7faa507, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FurMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _StrandMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutout: 0.2
+    - _AlphaToMask: 0
+    - _Cull: 2
+    - _Density: 25
+    - _DiscBillboard: 1
+    - _DiscBillboardLimit: 0.05
+    - _FurLength: 0.428
+    - _FurMaskToggle: 0
+    - _Gravity: 1
+    - _LengthRandom: 0.25
+    - _Metallic: 0
+    - _NormalMapToggle: 0
+    - _NormalScale: 0
+    - _Occlusion: 0.231
+    - _OcclusionCurve: 0.71
+    - _RimIntensity: 0
+    - _RimPower: 1
+    - _ShadowExtraBias: 0.05
+    - _SheenExponent: 1
+    - _SheenIntensity: 0
+    - _ShellCount: 1
+    - _Smoothness: 0
+    - _Stiffness: 1
+    - _StrandJitter: 1
+    - _StrandNormalStrength: 0
+    - _Thickness: 1.88
+    - _ViewBillboard: 0
+    - _WindFrequency: 2
+    - _WindStrength: 1
+    - _WindTurbulence: 2
+    m_Colors:
+    - _BaseColor: {r: 0.4528302, g: 0.23614682, b: 0.083303675, a: 1}
+    - _ExternalForce: {r: 0, g: 0, b: 0, a: 0}
+    - _RootColor: {r: 0.49056602, g: 0.49056602, b: 0.49056602, a: 1}
+    - _SheenColor: {r: 1, g: 1, b: 1, a: 1}
+    - _TipColor: {r: 1, g: 1, b: 1, a: 1}
+    - _WindDirection: {r: 1, g: 0, b: 0.3, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
