@@ -1,0 +1,68 @@
+FURFLUX - LICENSE AGREEMENT
+
+TERMS OF USE
+
+1. COMMERCIAL USE CONDITIONS
+
+   A) WITH ATTRIBUTION (Author Mentioned)
+      • You may use this software in commercial products
+      • You may monetize applications and projects
+      • You may sell games, apps, or services using this software
+      • You may include this software in paid assets or tools
+      • You may create derivative commercial works
+
+      REQUIREMENT: Must clearly credit the author in:
+      - Credits/About screen
+      - Documentation
+      - Package metadata
+      - Asset Store listing (if applicable)
+
+      Example: "Fur rendering powered by FURFLUX"
+
+   B) WITHOUT ATTRIBUTION (No Commercial Use)
+      • Personal projects (non-commercial)
+      • Educational purposes
+      • Hobby development
+      • Internal prototyping
+      • Non-profit projects
+      • Evaluation/testing
+
+      RESTRICTION: Commercial use is strictly prohibited
+      unless proper attribution is provided.
+
+2. MODIFICATION & DISTRIBUTION
+   • You may modify this software for personal use
+   • You may NOT distribute modified versions
+   • You may NOT republish this software
+   • You may NOT sell the software itself (only works using it)
+
+3. ATTRIBUTION GUIDELINES
+   Valid attribution includes:
+   • "FURFLUX by [Author]" in credits
+   • Link to original source in documentation
+   • Mention in project description or README
+   • Credit in commercial product about/info section
+
+   Location: Must be visible to end users or easily accessible
+
+4. LIMITATIONS
+   • This software is provided "AS IS"
+   • No warranty or liability
+   • Author not responsible for damages
+   • No technical support guaranteed
+
+5. TERMINATION
+   • License terminates immediately if commercial use occurs without attribution
+   • You must destroy all copies upon termination
+   • Author may request removal from public products
+
+DISCLAIMER
+THIS SOFTWARE IS PROVIDED WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHOR BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+CONTRACT, TORT OR OTHERWISE.
+
+---
+Last Updated: 2026-08-15
+Version: 1.0
