@@ -2,7 +2,11 @@
     "name": "FurRendering.Editor",
     "rootNamespace": "FurRendering.EditorTools",
     "references": [
-        "FurRendering.Runtime"
+        "FurRendering.Runtime",
+        "Unity.RenderPipelines.Universal.Runtime",
+        "Unity.RenderPipelines.Core.Runtime",
+        "Unity.RenderPipelines.Universal.Editor",
+        "Unity.RenderPipelines.Core.Editor"
     ],
     "includePlatforms": [
         "Editor"

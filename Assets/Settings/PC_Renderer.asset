@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2995596897248682178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea2bde542b7a5b84e8241cfc05537af4, type: 3}
+  m_Name: FurScreenFuzz
+  m_EditorClassIdentifier: FurRendering.Runtime::FurRendering.FurScreenFuzzFeature
+  m_Active: 1
+  settings:
+    stencilBit: 8
+    downsample: 2
+    maxRadiusPixels: 64
+  shader: {fileID: 4800000, guid: 30308cf452f08d646957f589f457a6ec, type: 3}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +53,8 @@ MonoBehaviour:
       type: 3}
   m_RendererFeatures:
   - {fileID: 7833122117494664109}
-  m_RendererFeatureMap: ad6b866f10d7b46c
+  - {fileID: -2995596897248682178}
+  m_RendererFeatureMap: ad6b866f10d7b46c3edf3a497e806dd6
   m_UseNativeRenderPass: 1
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 2

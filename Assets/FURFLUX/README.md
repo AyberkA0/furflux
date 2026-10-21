@@ -1,33 +1,69 @@
-# PC Shell Fur for URP
+# FURFLUX
 
-High-quality, shell-based fur rendering for Unity 6 and the Universal Render Pipeline (URP). Fur layers are rendered as GPU instances in a single submission per camera, without geometry shaders.
+**Shell and strand fur for the Universal Render Pipeline.**
+Version 1.1.0 · Unity 6000.3+ · URP 17.x
 
-## Quick start
+FURFLUX grows fur on any `MeshRenderer` or `SkinnedMeshRenderer`. It renders without
+geometry shaders: every layer or batch of hairs is a GPU instance. The coat moves with the
+object, reacts to wind, gets wet in water, bends around colliders, and can be painted right in
+the Scene view.
 
-1. Import the `Fur` folder into a Unity 6 URP project.
-2. Add **Rendering > Fur > Fur Controller** to an object with a `MeshRenderer` or `SkinnedMeshRenderer`.
-3. Assign a material using **Fur/Shell Lit (PC)** to the controller's **Fur Material** field.
-4. Use `Prefabs/FurPreviewSphere.prefab` as a self-contained reference setup, or open `Demo/FurDemo.unity`.
+---
+
+## Quick start (one minute)
+
+1. Select a mesh in your scene.
+2. **GameObject › FURFLUX › Add Fur (Shells)**, or right-click it in the Hierarchy and pick
+   the same entry.
+3. Press Play, or just look at the Scene view. The fur also renders in Edit Mode.
+
+That's it. The object gets a **Fur Controller** and its own material in `Assets/Fur Materials`,
+so tuning it never changes another object.
+
+To try both fur types side by side, open **Tools › FURFLUX › Open Showcase Scene**.
+
+---
+
+## Where things are
+
+| Menu | What it does |
+| --- | --- |
+| **Tools › FURFLUX › Welcome** | Quick start, project check and links |
+| **Tools › FURFLUX › Documentation** | Opens the full manual |
+| **Tools › FURFLUX › Open Demo / Showcase Scene** | The bundled scenes |
+| **Tools › FURFLUX › Install Screen Fuzz Renderer Feature** | Needed only for *Screen Space* fuzz |
+| **GameObject › FURFLUX › Add Fur (Shells / Strands)** | Furs the selected objects |
+| **Assets › Create › FURFLUX › Fur Material** | A new fur material of either type |
+| **Add Component › FURFLUX** | Fur Controller, Fur Water Volume, demo helpers |
+
+## Folder layout
+
+```
+FURFLUX/
+├─ README.md            ← you are here
+├─ CHANGELOG.md
+├─ LICENSE.txt
+├─ Documentation/       Manual.md: the full guide
+├─ Materials/           FUR_Shells_Default, FUR_Strands_Default
+├─ Prefabs/             FurPreview_Shells, FurPreview_Strands
+├─ Runtime/             Core · Strands · DetailMaps · Wetness · Collision · RendererFeatures
+├─ Editor/              Inspectors · Painting · Tools · Icons
+├─ Shaders/             FurLit.shader · Includes/ · Hidden/
+└─ Demo/                Scenes · Scripts · Materials · Textures  (safe to delete)
+```
+
+The `Demo` folder can be deleted in a shipping project. Nothing outside it depends on it.
 
 ## Requirements
 
-- Unity 6.3.21f1 or newer
-- Universal Render Pipeline 17.x
-- Windows, Linux, or macOS desktop target with DirectX 11/12, Vulkan, or Metal support
-- A source mesh with valid normals, UVs, and tangents (MikkTSpace tangents are recommended)
+- Unity **6000.3.21f1** or newer, Universal Render Pipeline **17.x**
+- A desktop graphics API: DirectX 11/12, Vulkan or Metal (Shader Model 4.5, GPU instancing)
+- A mesh with normals and UVs. MikkTSpace tangents are recommended.
+- **Strands** fur additionally needs **Read/Write Enabled** on the mesh import settings.
 
-This is a desktop/PC shader. It excludes GLES and is not intended for mobile or WebGL.
+OpenGL ES and WebGL are not supported.
 
-## Package contents
+## License
 
-- `Runtime/` - runtime controller and assembly definition
-- `Editor/` - custom inspector and density/continuity diagnostics
-- `Shaders/` - URP shell fur shader and includes
-- `Materials/` - ready-to-use demonstration material
-- `Prefabs/` - self-contained preview prefab using Unity's built-in sphere mesh
-- `Demo/` - a minimal runnable demonstration scene
-- `Documentation/Manual.md` - setup, tuning, performance, and limitations
-
-## Support
-
-Read the local manual before reporting an issue. When contacting the publisher, include your Unity version, URP version, target platform, a screenshot, and the Console output.
+See `LICENSE.txt`. Commercial use requires attribution, for example
+*"Fur rendering powered by FURFLUX"*.

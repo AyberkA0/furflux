@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FUR_Shells_Default
+  m_Shader: {fileID: 4800000, guid: 8dc2e348f11bcc049a88d80df7faa507, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FurColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FurLengthMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FurThicknessMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _WetnessMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutout: 0.269
+    - _CombStrength: 1.5
+    - _Cull: 0
+    - _Curl: 0
+    - _Density: 75
+    - _DstBlend: 0
+    - _FurLength: 0.557
+    - _FurType: 0
+    - _FuzzAmount: 0.228
+    - _FuzzExtent: 0.09
+    - _FuzzMode: 1
+    - _FuzzSoftness: 12
+    - _FuzzStencilRef: 8
+    - _FuzzStencilWriteMask: 8
+    - _Gravity: 1.55
+    - _GravityMultiplierOnWet: 3
+    - _LengthRandom: 1
+    - _NormalMapToggle: 0
+    - _NormalScale: 0
+    - _Occlusion: 0
+    - _OcclusionCurve: 4
+    - _RimIntensity: 0.41
+    - _RimPower: 5.22
+    - _SheenExponent: 55
+    - _SheenIntensity: 2
+    - _Smoothness: 0
+    - _SrcBlend: 1
+    - _Stiffness: 0.76
+    - _StiffnessMultiplierOnWet: 0.7
+    - _StrandJitter: 1
+    - _StrandNormalStrength: 0.323
+    - _Thickness: 2.61
+    - _WetClumpSize: 3
+    - _WetClumpStrength: 0.8
+    - _WetDarkening: 1.7
+    - _WetLengthScale: 0.838
+    - _WetOcclusionScale: 1.35
+    - _WetRimScale: 0.25
+    - _WetSheenScale: 0.35
+    - _WetSmoothness: 0.85
+    - _WetThinning: 0.65
+    - _WetWindResponse: 1
+    - _WindFrequency: 1.56
+    - _WindGustiness: 0.6
+    - _WindShelter: 0.35
+    - _WindStrength: 1
+    - _WindTurbulence: 2
+    - _ZWrite: 1
+    m_Colors:
+    - _BaseColor: {r: 0.7264151, g: 0.4341284, b: 0.15419188, a: 1}
+    - _RimColor: {r: 0.20754719, g: 0.0468253, b: 0.01272696, a: 1}
+    - _RootColor: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
+    - _SheenColor: {r: 0.3490566, g: 0.1029429, b: 0.02140442, a: 1}
+    - _TipColor: {r: 1, g: 1, b: 1, a: 1}
+    - _WindDirection: {r: 0, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

@@ -128,7 +128,8 @@ Packages/packages-lock.json linguist-generated
 *.jpeg                  lfs
 *.jpg                   lfs
 *.pict                  lfs
-*.png                   lfs
+# PNGs are stored as normal files: they are small, and the account's LFS budget is exhausted.
+*.png                   binary
 *.psd                   lfs
 *.tga                   lfs
 *.tif                   lfs
