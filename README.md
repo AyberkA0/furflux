@@ -94,7 +94,7 @@ Click **Draw Fur** on the Fur Controller and paint on the model in the Scene vie
   at any import scale. The LOD never leaves layers far enough apart to see gaps.
 - **Distant fur stays visible.** Once strands are smaller than a pixel, the coat switches to their
   average coverage instead of disappearing.
-- **Cheap shadows.** *Base Layer Only* shadows cost nothing extra.
+- **Cheap shadows.** *Base Layer Only* shadows cost nothing extra. (Optional)
 - **Strand budget.** *Max Strands* caps the hair count for strand fur.
 - **No idle work.** Objects off screen skip their per-frame work. Painted maps re-bake only when
   something changes.
