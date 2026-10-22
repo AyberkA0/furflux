@@ -89,6 +89,7 @@ namespace FurRendering
 
             Shader.SetGlobalFloat("_FurGeometryMode", 0f);
             Shader.SetGlobalFloat("_FurDrawSkin", 1f);
+            Shader.SetGlobalFloat("_FurInstancedDraw", 0f);
             Shader.SetGlobalFloat("_FurFuzzMode", 0f);
             Shader.SetGlobalFloat("_FurInstanceCount", 1f);
             Shader.SetGlobalFloat("_FurRootsPerBatch", FurStrandDistribution.RootsPerBatch);

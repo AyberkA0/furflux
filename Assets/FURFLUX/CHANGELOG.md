@@ -28,6 +28,19 @@
     both demo cameras now use it.
   - When to aggregate is measured on the pixel's area, so silhouettes no longer switch to
     the distant mode while the coat is still close.
+- **Close-ups turned shell fur into dithered blocks.** The LOD treated layers drifting
+  apart on screen, which happens as the camera comes close, as a reason to switch the coat
+  to its distant, averaged form. Only the height the LOD removes drives that switch now.
+- **Objects that carry the fur material on their own renderer went see-through at random.**
+  Unity GPU-instances renderers that share a material, and the shader read each object's
+  slot in that batch as a fur layer, so whichever body landed in slot 3 was clipped like the
+  third layer of a coat. Which one depended on draw order, so it came and went with the
+  camera. The instance index is now only a layer index in the Fur Controller's own draws.
+- **Distance LOD thinned coats into floating specks.** The distance curve could leave a few
+  layers several pixels apart on screen. It now keeps enough layers to hold the gap under
+  about 1.5 pixels, up to the count the curve gives at distance zero.
+- **Showcase, Distance station:** the five spheres had hand-set layer counts rather than
+  LOD. They now share one curve, so the LOD picks the count from the distance.
 - **Strand Thickness** now reaches 20 (was 5). Low-density, stylised coats need wider strands
   than the old range allowed, and the Showcase's stylised coat now has thick, cartoon-like
   tufts.
@@ -35,7 +48,8 @@
   bare. The shader now holds the cutout to 0.9, and the Showcase materials use sensible values
   again.
 - **Showcase:** the caption was rewritten as a small, plain label in the corner, and the unused
-  3D text labels were removed.
+  3D text labels were removed. Zoom now runs from about 1 m to 35 m, in steps proportional
+  to the distance, toward whatever is under the cursor; W/S and +/- zoom as well.
 - **Comb could not be painted on its own.** With only Comb ticked, the brush never took the mouse
   in the Scene view.
 - **Revert to Source Textures** and `RebakeDetailMaps()` left comb strokes in place. The comb map

@@ -772,6 +772,12 @@ float    _FurGeometryMode;      // 0 = this draw is the skin, 1 = this draw is t
 // 1 = this component owns the surface the fur grows out of and draws it; 0 = the object's
 // own renderer is visible and draws it, so the base layer must not put a second copy on top.
 float    _FurDrawSkin;
+// 1 = a Fur Controller submitted this draw, so the instance index is a layer (or root batch)
+// index. 0 = anything else - most often a MeshRenderer that carries the fur material itself,
+// which Unity may batch with other renderers through GPU instancing. There the instance index
+// only says where the object landed in that batch, and reading it as a layer clipped whole
+// bodies as though they were fur. See GetFurShellIndex.
+float    _FurInstancedDraw;
 float    _FurInstanceCount;     // Roots actually being drawn (the LOD result)
 float    _FurRootsPerBatch;     // Roots carried by one instance of the batch mesh
 float    _FurSkinned;           // 1 = resolve roots through _FurSkinMatrices

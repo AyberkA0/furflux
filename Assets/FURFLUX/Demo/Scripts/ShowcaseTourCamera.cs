@@ -11,7 +11,7 @@ namespace FurRendering.Demo
     /// <summary>
     /// Tour camera for the Fur Showcase: glides left to right across the nine stations at
     /// one fixed studio angle, with a small caption in the corner.
-    /// Keys 1-9, arrows or A/D switch station; drag to orbit; scroll to zoom; H hides the caption.
+    /// Keys 1-9, arrows or A/D switch station; drag to orbit; scroll, W/S or +/- to zoom; H hides the caption.
     /// </summary>
     [RequireComponent(typeof(Camera))]
     [AddComponentMenu("FURFLUX/Demo/Showcase Tour Camera")]
@@ -49,9 +49,12 @@ namespace FurRendering.Demo
 
         [Header("Orbit & Zoom Controls")]
         [SerializeField] private float orbitSensitivity = 0.15f;
-        [SerializeField] private float zoomSensitivity = 1.5f;
-        [SerializeField] private float minZoomOffset = -1.8f;
-        [SerializeField] private float maxZoomOffset = 4.0f;
+        [Tooltip("How much one wheel notch changes the distance, as a fraction of it.")]
+        [SerializeField] private float zoomSensitivity = 0.15f;
+        [Tooltip("Closest the camera gets to the point it is looking at, in meters.")]
+        [SerializeField] private float minZoomDistance = 1.0f;
+        [Tooltip("Furthest the camera pulls back from the station, in meters.")]
+        [SerializeField] private float maxZoomDistance = 35f;
 
         [Header("UI Overlay")]
         [SerializeField] private bool showHud = true;
@@ -65,7 +68,8 @@ namespace FurRendering.Demo
 
         private float _orbitYaw;
         private float _orbitPitch;
-        private float _zoomOffset;
+        private float _zoomFactor = 1f;     // camera distance as a multiple of the station's own
+        private Vector3 _focusOffset;       // where zooming toward the cursor has moved the pivot
         private Camera _cam;
 
         private void Awake()
@@ -205,7 +209,13 @@ namespace FurRendering.Demo
 
             _orbitYaw = 0f;
             _orbitPitch = 0f;
-            _zoomOffset = 0f;
+            ResetZoom();
+        }
+
+        private void ResetZoom()
+        {
+            _zoomFactor = 1f;
+            _focusOffset = Vector3.zero;
         }
 
         private void Update()
@@ -250,7 +260,7 @@ namespace FurRendering.Demo
             _currentIndex = Mathf.Clamp(index, 0, stations.Length - 1);
             _orbitYaw = 0f;
             _orbitPitch = 0f;
-            _zoomOffset = 0f;
+            ResetZoom();
         }
 
         private void HandleOrbitAndZoom()
@@ -266,10 +276,67 @@ namespace FurRendering.Demo
                 _orbitPitch = Mathf.Clamp(_orbitPitch, -35f, 35f);
             }
 
+            // W/S or +/- zoom too, at about eight wheel notches a second.
+            scroll += ReadZoomKeys() * 8f * Time.unscaledDeltaTime;
+
             if (Mathf.Abs(scroll) > 0.001f)
+                Zoom(scroll);
+        }
+
+        /// <summary>
+        /// Zoom in steps proportional to the distance, so a notch is as noticeable at 30 m as
+        /// at 1 m, and toward whatever is under the cursor. Pulling back drifts the view
+        /// home to the station's centre.
+        /// </summary>
+        private void Zoom(float scroll)
+        {
+            StationView st = stations[_currentIndex];
+            Vector3 baseOffset = StationOffset(st);
+            float baseDistance = Mathf.Max(baseOffset.magnitude, 1e-3f);
+
+            float oldFactor = _zoomFactor;
+            float newFactor = oldFactor * Mathf.Exp(-scroll * zoomSensitivity);
+            newFactor = Mathf.Clamp(newFactor, minZoomDistance / baseDistance, maxZoomDistance / baseDistance);
+            float ratio = newFactor / oldFactor;
+            if (Mathf.Approximately(ratio, 1f))
+                return;
+
+            Vector3 pivot = st.targetCenter + _focusOffset;
+
+            if (ratio < 1f && _cam != null)
             {
-                _zoomOffset = Mathf.Clamp(_zoomOffset - scroll * zoomSensitivity, minZoomOffset, maxZoomOffset);
+                // Scale the camera about the point under the cursor: that point then stays
+                // where it is on screen while everything around it grows.
+                // The object under the cursor if there is one, so a close-up lands on the
+                // coat rather than in the gap between two exhibits.
+                Ray ray = _cam.ScreenPointToRay(ReadMousePosition());
+                var plane = new Plane(-transform.forward, pivot);
+                Vector3 point;
+                if (Physics.Raycast(ray, out RaycastHit surface, 200f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+                    point = surface.point;
+                else if (plane.Raycast(ray, out float hit))
+                    point = ray.GetPoint(hit);
+                else
+                    point = pivot;
+                pivot = point + (pivot - point) * ratio;
             }
+            else
+            {
+                _focusOffset *= 1f / ratio;
+                pivot = st.targetCenter + _focusOffset;
+            }
+
+            _focusOffset = pivot - st.targetCenter;
+            _focusOffset.x = Mathf.Clamp(_focusOffset.x, -4f, 4f);
+            _focusOffset.y = Mathf.Clamp(_focusOffset.y, -1.2f, 1.5f);
+            _focusOffset.z = Mathf.Clamp(_focusOffset.z, -2f, 2f);
+            _zoomFactor = newFactor;
+        }
+
+        /// <summary>Camera position relative to the station's target at the default framing.</summary>
+        private static Vector3 StationOffset(StationView st)
+        {
+            return new Vector3(0f, st.cameraHeightY - st.targetCenter.y, -st.cameraDistanceZ);
         }
 
         private void UpdateCameraTransform()
@@ -278,20 +345,12 @@ namespace FurRendering.Demo
 
             StationView st = stations[_currentIndex];
 
-            // Base position maintains fixed Y and Z offset relative to station target
-            float targetZ = st.targetCenter.z - (st.cameraDistanceZ + _zoomOffset);
-            float targetY = st.cameraHeightY;
-            float targetX = st.targetCenter.x;
-
-            Vector3 baseCamPos = new Vector3(targetX, targetY, targetZ);
-
-            // If user orbits, rotate around the station target
-            if (Mathf.Abs(_orbitYaw) > 0.01f || Mathf.Abs(_orbitPitch) > 0.01f)
-            {
-                Vector3 toCam = baseCamPos - st.targetCenter;
-                Quaternion orbitRot = Quaternion.Euler(_orbitPitch, _orbitYaw, 0f);
-                baseCamPos = st.targetCenter + orbitRot * toCam;
-            }
+            // The station's own framing, dollied along its line of sight by the zoom and
+            // rotated about the pivot when the user orbits. The pitch is fixed, so moving
+            // along that line keeps the pivot on the same spot of the screen.
+            Vector3 pivot = st.targetCenter + _focusOffset;
+            Quaternion orbitRot = Quaternion.Euler(_orbitPitch, _orbitYaw, 0f);
+            Vector3 baseCamPos = pivot + orbitRot * (StationOffset(st) * _zoomFactor);
 
             // Smooth translation (glides horizontally across X axis)
             transform.position = Vector3.SmoothDamp(transform.position, baseCamPos, ref _currentVelocity, positionSmoothTime, Mathf.Infinity, Time.unscaledDeltaTime);
@@ -443,7 +502,7 @@ namespace FurRendering.Demo
             if (alpha <= 0f)
                 return;
 
-            const string hint = "← →  stations      drag  orbit      scroll  zoom      H  hide";
+            const string hint = "← →  stations      drag  orbit      scroll / W S  zoom      H  hide";
             DrawText(new Rect(width - Margin - 600f, height - Margin - 14f, 600f, 18f),
                      hint, _hintStyle, InkMuted, alpha);
         }
@@ -518,6 +577,22 @@ namespace FurRendering.Demo
             var mouse = Mouse.current;
             return mouse != null ? mouse.scroll.ReadValue().y * 0.01f : 0f;
         }
+
+        private static float ReadZoomKeys()
+        {
+            var kb = Keyboard.current;
+            if (kb == null) return 0f;
+            float zoom = 0f;
+            if (kb.wKey.isPressed || kb.equalsKey.isPressed || kb.numpadPlusKey.isPressed) zoom += 1f;
+            if (kb.sKey.isPressed || kb.minusKey.isPressed || kb.numpadMinusKey.isPressed) zoom -= 1f;
+            return zoom;
+        }
+
+        private static Vector2 ReadMousePosition()
+        {
+            var mouse = Mouse.current;
+            return mouse != null ? mouse.position.ReadValue() : new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+        }
 #else
         private static bool IsDigitPressed(int digit)
         {
@@ -564,6 +639,19 @@ namespace FurRendering.Demo
         private static float ReadScrollWheel()
         {
             return Input.GetAxisRaw("Mouse ScrollWheel") * 10f;
+        }
+
+        private static float ReadZoomKeys()
+        {
+            float zoom = 0f;
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.Equals) || Input.GetKey(KeyCode.KeypadPlus)) zoom += 1f;
+            if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.Minus) || Input.GetKey(KeyCode.KeypadMinus)) zoom -= 1f;
+            return zoom;
+        }
+
+        private static Vector2 ReadMousePosition()
+        {
+            return Input.mousePosition;
         }
 #endif
     }

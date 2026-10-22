@@ -160,6 +160,10 @@ namespace FurRendering
         // finer than the screen can resolve. Two is one layer per half pixel.
         private const float LodShellsPerPixel = 2f;
 
+        // The widest the gap between two layers may open on screen before the distance
+        // curve is overruled - see ResolveShellCount.
+        private const float LodMaxGapPixels = 1.5f;
+
         // Where the height fade starts, in pixels of fur. Below this the coat is
         // shortening toward LodMinFade rather than holding full height; it never reaches
         // zero, so this sets where the ramp begins and not where the fur ends.
@@ -588,6 +592,7 @@ namespace FurRendering
         private static readonly int RootsPerBatchId         = Shader.PropertyToID("_FurRootsPerBatch");
         private static readonly int SkinnedId               = Shader.PropertyToID("_FurSkinned");
         private static readonly int DrawSkinId              = Shader.PropertyToID("_FurDrawSkin");
+        private static readonly int InstancedDrawId         = Shader.PropertyToID("_FurInstancedDraw");
         private static readonly int ObjectToWorldId         = Shader.PropertyToID("_FurObjectToWorld");
         private static readonly int WorldToObjectId         = Shader.PropertyToID("_FurWorldToObject");
         private static readonly int RootsBufferId           = Shader.PropertyToID("_FurRoots");
@@ -2044,7 +2049,12 @@ namespace FurRendering
                 // takes a coat from thirty-two shells to four long before the fur is short
                 // enough for the height fade to start, and each shell removed is coverage
                 // the coat no longer has.
-                _aggregation = Mathf.Clamp01(Mathf.Max(1f - _lodFade, ResolveLayerGap(shells)));
+                // Only the height the LOD has taken away. The layer gap used to be folded in
+                // here as well, and it fired the wrong way round: layers drift apart on
+                // screen when the camera comes CLOSE, so every close-up switched the whole
+                // coat to its distant, averaged form - large strands drawn as dithered
+                // blocks. Separated layers are fixed by more layers, not by averaging.
+                _aggregation = Mathf.Clamp01(1f - _lodFade);
                 _countFraction = 1f;
 
                 RenderShells(camera, shells);
@@ -2970,8 +2980,19 @@ namespace FurRendering
 
             int distanceShells = Mathf.RoundToInt(shellCountByDistance.Evaluate(distance));
             int screenSpaceShells = Mathf.CeilToInt(furPixels * LodShellsPerPixel);
+            int shells = Mathf.Min(distanceShells, screenSpaceShells);
 
-            return Mathf.Clamp(Mathf.Min(distanceShells, screenSpaceShells), LodMinShells, MaxShellCount);
+            // The curve may thin the coat only while its layers still land close together on
+            // screen. Past that a shell stack stops reading as hair: the few layers left show
+            // as separate sheets of dots floating over a bare body. So the count never drops
+            // below what keeps the gap under LodMaxGapPixels - which on a distant coat is
+            // already a handful of shells - and never rises above what the curve authors up
+            // close, so a close-up costs no more than it was set to.
+            int gapFloor = Mathf.CeilToInt(furPixels / LodMaxGapPixels);
+            int authoredMax = Mathf.Max(Mathf.RoundToInt(shellCountByDistance.Evaluate(0f)), LodMinShells);
+            shells = Mathf.Max(shells, Mathf.Min(gapFloor, authoredMax));
+
+            return Mathf.Clamp(shells, LodMinShells, MaxShellCount);
         }
 
         /// <summary>
@@ -3070,6 +3091,9 @@ namespace FurRendering
         /// </summary>
         private void WriteSharedProperties(MaterialPropertyBlock block, int shells)
         {
+            // Marks the draw as this component's own, so the shader may read the instance
+            // index as a layer (or root batch) index. See GetFurShellIndex.
+            block.SetFloat(InstancedDrawId, 1f);
             block.SetFloat(ShellCountId, shells);
             block.SetFloat(LodFadeId, _lodFade);
             block.SetFloat(AggregationId, _aggregation);
@@ -3712,28 +3736,6 @@ namespace FurRendering
                 return _skinnedRenderer.sharedMesh;
 
             return furProxyMesh != null ? furProxyMesh : (_meshFilter != null ? _meshFilter.sharedMesh : null);
-        }
-
-        /// <summary>
-        /// How far apart the remaining shells have drifted ON SCREEN, as a fade amount.
-        ///
-        /// The same question the fragment stage asks sideways, asked upward: a shell stack
-        /// reads as a continuous coat exactly while its layers land less than a pixel
-        /// apart, and it starts showing the gaps between them as soon as they do not. So
-        /// the measure is the fur's height in pixels divided by the number of layers
-        /// spanning it, and anything past one pixel is a gap the aggregation should close.
-        ///
-        /// This is deliberately NOT a ratio of shell counts. Whether eight shells is
-        /// plenty or nowhere near depends entirely on how tall the fur is on screen -
-        /// eight is luxurious on a distant creature and threadbare on one filling the
-        /// frame - and a ratio cannot tell those apart, which is how a coat ends up
-        /// aggregating at a distance where it still looks perfect, or not aggregating at
-        /// one where it has visibly come apart.
-        /// </summary>
-        private float ResolveLayerGap(int shells)
-        {
-            float gapPixels = _furPixels / Mathf.Max(shells, 1);
-            return Mathf.Clamp01(gapPixels - 1f);
         }
 
         /// <summary>How many of the baked roots this camera actually draws.</summary>

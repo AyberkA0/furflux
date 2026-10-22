@@ -49,7 +49,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaCutout: 0.43
+    - _AlphaCutout: 0.31
     - _CombStrength: 1.5
     - _Cull: 0
     - _Curl: 0

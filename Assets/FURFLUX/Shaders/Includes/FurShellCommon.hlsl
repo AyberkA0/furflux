@@ -21,11 +21,15 @@
 //  With instancing disabled (the material assigned directly to a MeshRenderer)
 //  only the base shell is drawn, so the shader still previews correctly inside
 //  the material editor.
+//
+//  Instancing alone does not make the index a layer: Unity also instances ordinary
+//  MeshRenderers that share a material, and a renderer carrying the fur material lands at
+//  whatever slot that batch gives it. Only the Fur Controller's own draws say so.
 // ---------------------------------------------------------------------------
 uint GetFurShellIndex()
 {
 #if defined(UNITY_INSTANCING_ENABLED) || defined(UNITY_PROCEDURAL_INSTANCING_ENABLED) || defined(UNITY_STEREO_INSTANCING_ENABLED)
-    return unity_InstanceID;
+    return _FurInstancedDraw > 0.5 ? unity_InstanceID : 0u;
 #else
     return 0u;
 #endif

@@ -1,78 +1,135 @@
-# FURFLUX - Shell Fur Shader for URP - Manual
+<p align="center">
+  <img src="Screenshots/readme/banner.svg" alt="FURFLUX: shell and strand fur for Unity URP" width="100%">
+</p>
 
-## Demo
+<p align="center">
+  <b>Unity 6000.3+</b> &nbsp;·&nbsp; <b>URP 17</b> &nbsp;·&nbsp; DirectX 11/12, Vulkan, Metal &nbsp;·&nbsp; v1.1.0
+  <br>
+  <a href="Screenshots/8.mp4">Watch the demo video</a> &nbsp;·&nbsp;
+  <a href="Assets/FURFLUX/Documentation/Manual.md">Read the manual</a>
+</p>
 
-[![Watch Demo](https://img.shields.io/badge/▶_Watch_Demo-blue?style=for-the-badge)](https://github.com/AyberkA0/furflux/blob/main/Screenshots/8.mp4)
+<p align="center">
+  <img src="Screenshots/readme/stylised_realistic.jpg" alt="A stylised and a realistic coat side by side" width="100%">
+</p>
 
-[🎬 Watch Demo Video](https://github.com/AyberkA0/furflux/blob/main/Screenshots/8.mp4)
+FURFLUX grows fur on any `MeshRenderer` or `SkinnedMeshRenderer`. The coat moves with the body,
+leans into the wind, gets wet where it touches water, bends around colliders, and can be painted
+directly in the Scene view. No geometry shaders are used: each layer or batch of hairs is a GPU
+instance.
 
-![Screenshot4](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/4.png)
+## Two kinds of fur
 
-## Compatibility
+<img src="Screenshots/readme/fur_types.svg" alt="Shell fur is stacked layers; strand fur is one ribbon per hair" width="100%">
 
-PC Shell Fur targets Unity 6.3.21f1+ with URP 17.x. It is designed for desktop rendering APIs (DirectX 11/12, Vulkan, and Metal) and requires Shader Model 4.5-class GPU instancing. Mobile and WebGL are not supported.
+Choose the type from one dropdown on the material. Both types use the same physics, so a coat
+keeps its shape when you switch.
 
-## Setup
+- **Shells** are cheap and dense. They suit crowds of creatures and short, velvety coats.
+- **Strands** give every hair its own ribbon, skinned on the GPU. They hold up in close-ups and
+  on silhouettes, which makes them the choice for hero characters and long hair.
 
-1. Select a GameObject containing a `MeshRenderer` or `SkinnedMeshRenderer`.
-2. Add **Rendering > Fur > Fur Controller**.
-3. Create a material with the **Fur/Shell Lit (PC)** shader, then assign it to **Fur Material**.
-4. Leave **Source Renderer** empty to use the renderer on the same GameObject, or assign a different renderer explicitly.
-5. Enable GPU instancing on the material. The controller also enables it automatically when it first renders.
+<table>
+  <tr>
+    <td width="50%"><img src="Screenshots/readme/closeup.jpg" alt="Shell fur close-up"><br><sub>Shells, up close</sub></td>
+    <td width="50%"><img src="Screenshots/readme/strands.jpg" alt="Strand fur"><br><sub>Strands, one ribbon per hair</sub></td>
+  </tr>
+</table>
 
-`Prefabs/FurPreviewSphere.prefab` is a minimal, self-contained reference. `Demo/FurDemo.unity` demonstrates the same setup in a clean URP scene.
+## A coat that reacts
 
-## Source mesh requirements
+<img src="Screenshots/readme/dynamics.svg" alt="Wind, motion inertia, collision and wetness" width="100%">
 
-The source mesh needs UVs and normals. Tangents are strongly recommended for correct normal mapping and anisotropic highlights. In the model import settings, use **Normals: Import** or **Calculate** and **Tangents: Calculate MikkTSpace**.
+- **Wind.** Gusts lay the coat over and let it spring back. The side facing away from the wind
+  is sheltered and moves less.
+- **Motion inertia.** Fur trails behind a moving body and overshoots when it stops. Turning and
+  individual bones count too, so a tail flick moves the tail's fur.
+- **Collision.** Hair tips are pushed aside by box, sphere and capsule colliders instead of
+  passing through them.
+- **Wetness.** Only the part that touches water gets wet. Wet fur darkens, clumps, hangs heavier
+  and slowly dries.
 
-Use a low-poly proxy mesh when practical. Each shell repeats the source mesh, so base mesh triangles are multiplied by the active shell count.
+<table>
+  <tr>
+    <td width="50%"><img src="Screenshots/readme/wind.jpg" alt="Wind"></td>
+    <td width="50%"><img src="Screenshots/readme/wetness.jpg" alt="Wetness"></td>
+  </tr>
+  <tr>
+    <td width="50%"><img src="Screenshots/readme/motion.jpg" alt="Motion inertia"></td>
+    <td width="50%"><img src="Screenshots/readme/collision.jpg" alt="Collision"></td>
+  </tr>
+</table>
 
-## Quality and LOD
+## Paint it
 
-- **Distance LOD Curve** maps camera distance in meters (X) to shell count (Y). Its first key controls close-range quality; shape tangent handles into a parabola or smooth falloff for the desired profile. Shell values are capped at 64.
-- **Shells Per Pixel** caps fur density by on-screen thickness, avoiding imperceptible overdraw at distance.
-- **Skin Only Pixel Threshold** falls back to the base shell when fur is too thin to resolve.
-- **Hard Cull Distance** is optional; use it only when the object can be bare at distance.
-- **Shadow Mode**: `BaseLayerOnly` is recommended. `AllShells` is expensive; `None` is fastest.
+<img src="Screenshots/readme/brush.svg" alt="The Draw Fur brush and its four channels" width="100%">
 
-Fur cost is dominated by overdraw. Shorter fur and fewer shells generally perform better than very long, dense fur.
+Click **Draw Fur** on the Fur Controller and paint on the model in the Scene view.
 
-## Material tuning
+- **Four channels:** length, thickness, colour and comb. One stroke writes every channel you
+  have ticked, so they share the same edge.
+- **Comb** takes its direction from the stroke. Drag across the coat and the hair lies down that
+  way.
+- **Solid** mode paints only the surface you can see. **Wireframe** mode paints through the model,
+  which helps with collars, ears and tail rings.
+- Strokes support undo and redo, an eyedropper (`I`) and resizing with `[` and `]`. **Save Painted
+  Maps** writes them out as textures.
+- **Match Mesh Colours** gives the coat the colours the model's own texture already has.
 
-### Fur structure
+<p align="center">
+  <img src="Screenshots/readme/patterned.jpg" alt="A coat coloured from a leopard texture" width="70%">
+</p>
 
-- **Fur Length** controls shell displacement in meters.
-- **Strand Density**, **Thickness**, **Placement Randomness**, and **Length Randomness** control procedural strand distribution.
-- Enable **Use Fur Mask Texture** to use the mask texture's red channel for localized density and length.
-- **Disc Billboard** helps reduce shell banding at glancing angles. Use the limit control to prevent excessive stretching on the silhouette.
+## Built to be fast
 
-If strands appear separated, first raise shell count; then increase thickness or reduce fur length. The custom inspector displays a continuity diagnostic for procedural materials.
+<img src="Screenshots/readme/performance.svg" alt="Distance LOD reduces layers with distance" width="100%">
 
-### Motion and lighting
+- **One instanced draw per coat.** Every shell layer is an instance of the same draw. There are no
+  geometry or tessellation stages.
+- **Distance LOD.** Shell count follows a curve measured in object lengths, so it works the same
+  at any import scale. The LOD never leaves layers far enough apart to see gaps.
+- **Distant fur stays visible.** Once strands are smaller than a pixel, the coat switches to their
+  average coverage instead of disappearing.
+- **Cheap shadows.** *Base Layer Only* shadows cost nothing extra.
+- **Strand budget.** *Max Strands* caps the hair count for strand fur.
+- **No idle work.** Objects off screen skip their per-frame work. Painted maps re-bake only when
+  something changes.
 
-- **Stiffness**, **Gravity**, wind controls, and **Motion Inertia** shape strand motion.
-- **Fur Base Darkening** and its curve add volume near the root.
-- **Anisotropic Sheen** and **Backlight Scatter** add fur-like highlights.
-- If shadow acne appears, increase **Extra Shadow Bias** slightly. Reduce it if shadows detach visibly.
+<p align="center">
+  <img src="Screenshots/readme/distance.jpg" alt="The same coat at five distances" width="70%">
+</p>
 
-## Limitations
+## And the details
 
-- Shell fur is an approximation and can exhibit silhouette artifacts at extreme grazing angles.
-- It does not provide per-object baked light probe data for instanced shells; ambient/probe lighting is used.
-- Rendering Debugger material views are intentionally not supported to keep shader variant count down.
-- The shader is intended for moving creatures and does not include lightmap variants.
+<table>
+  <tr>
+    <td width="50%"><img src="Screenshots/readme/sheen.jpg" alt="Sheen and backlight"><br><sub>Anisotropic sheen and backlight scatter</sub></td>
+    <td width="50%"><img src="Screenshots/readme/short_long.jpg" alt="Short and long coats"><br><sub>Dense velvet next to a long coat</sub></td>
+  </tr>
+</table>
 
-## Troubleshooting
+Hair colour banding, curl, clumping, a soft fuzz layer for silhouettes, presets, and a script API
+for all of it.
 
-**Material needs to enable instancing:** enable GPU Instancing on the fur material.
+## Quick start
 
-**Flat or incorrect highlights:** ensure the mesh has correct tangents.
+1. Select a mesh in your scene.
+2. Choose **GameObject › FURFLUX › Add Fur (Shells)** or **Add Fur (Strands)**.
+3. That's it. The fur also renders in Edit Mode.
 
-**Visible bands/gaps:** raise the near portion of the Distance LOD Curve, increase Thickness, or reduce Fur Length.
+Each object gets its own material in `Assets/Fur Materials`, so tuning it never changes another
+object. To see every feature, open **Tools › FURFLUX › Open Showcase Scene** and press Play.
 
-**Low frame rate:** reduce Fur Length, use a proxy mesh, use `BaseLayerOnly` shadows, and lower the Distance LOD Curve at medium and far ranges.
+## Requirements
 
-![Screenshot1](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/1.png)
+- Unity **6000.3.21f1** or newer, Universal Render Pipeline **17.x**
+- DirectX 11/12, Vulkan or Metal (Shader Model 4.5, GPU instancing)
+- A mesh with normals and UVs. Strand fur also needs **Read/Write Enabled**.
 
-![Screenshot5](https://raw.githubusercontent.com/AyberkA0/furflux/main/Screenshots/5.png)
+Mobile (OpenGL ES) and WebGL are not supported.
+
+## Documentation and license
+
+The [manual](Assets/FURFLUX/Documentation/Manual.md) covers every setting, and the
+[changelog](Assets/FURFLUX/CHANGELOG.md) lists what changed. See [LICENSE.txt](LICENSE.txt) for
+terms.
