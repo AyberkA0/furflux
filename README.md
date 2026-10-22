@@ -5,6 +5,8 @@ painting the coat in the Scene view.
 
 Unity 6000.3+ · URP 17 · DirectX 11/12, Vulkan, Metal · v1.1.0 · [Manual](Assets/FURFLUX/Documentation/Manual.md) · [Changelog](Assets/FURFLUX/CHANGELOG.md) · [Demo video](Screenshots/8.mp4)
 
+<a href="https://buymeabitcoffee.vercel.app/btc/bc1qhae9un6j8mel5xcrd4trajm65wfunlltkzelh7?identifier=Buy+Me+a+Coffee"><img src="https://img.shields.io/badge/☕%20Buy%20Me%20a%20Coffee-Donate-f7931a?style=for-the-badge&logo=bitcoin&logoColor=white" alt="Buy Me a Coffee"></a>
+
 ![A stylised and a realistic coat side by side](Screenshots/readme/stylised_realistic.jpg)
 
 FURFLUX grows fur on any `MeshRenderer` or `SkinnedMeshRenderer`. It does not use geometry or
@@ -95,7 +97,8 @@ Other things that keep the cost down:
 
 - Once strands are smaller than a pixel, distant fur draws their average coverage instead of
   disappearing.
-- *Base Layer Only* shadows cost nothing extra. *All Shells* redraws the coat into every cascade.
+- Shadow mode is optional: *Base Layer Only* costs nothing extra, *All Shells* redraws the coat
+  into every cascade.
 - *Max Strands* caps the hair count per object for strand fur.
 - Objects off screen skip their per-frame work, and painted maps re-bake only when something
   changes.
