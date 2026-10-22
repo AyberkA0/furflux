@@ -10,6 +10,10 @@
 </p>
 
 <p align="center">
+  <a href="https://buymeabitcoffee.vercel.app/btc/bc1qhae9un6j8mel5xcrd4trajm65wfunlltkzelh7?identifier=Buy+Me+a+Coffee"><img src="https://img.shields.io/badge/☕%20Buy%20Me%20a%20Coffee-Donate-f7931a?style=for-the-badge&logo=bitcoin&logoColor=white" alt="Buy Me a Coffee"></a>
+</p>
+
+<p align="center">
   <img src="Screenshots/readme/stylised_realistic.jpg" alt="A stylised and a realistic coat side by side" width="100%">
 </p>
 
