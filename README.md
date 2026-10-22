@@ -51,12 +51,12 @@ keeps its shape when you switch.
 
 <table>
   <tr>
-    <td width="50%"><img src="Screenshots/readme/wind.jpg" alt="Wind"></td>
-    <td width="50%"><img src="Screenshots/readme/wetness.jpg" alt="Wetness"></td>
+    <td width="50%"><img src="Screenshots/readme/wind.gif" alt="Wind"></td>
+    <td width="50%"><img src="Screenshots/readme/wetness.gif" alt="Wetness"></td>
   </tr>
   <tr>
-    <td width="50%"><img src="Screenshots/readme/motion.jpg" alt="Motion inertia"></td>
-    <td width="50%"><img src="Screenshots/readme/collision.jpg" alt="Collision"></td>
+    <td width="50%"><img src="Screenshots/readme/motion.gif" alt="Motion inertia"></td>
+    <td width="50%"><img src="Screenshots/readme/collision.gif" alt="Collision"></td>
   </tr>
 </table>
 
