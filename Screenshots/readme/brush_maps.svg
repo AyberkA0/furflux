@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 300" width="1280" height="300" role="img" aria-label="One brush stroke written into the length, thickness, colour and comb maps">
+<style>
+  .ink{stroke:#1f2328;fill:none}
+  .inkf{fill:#1f2328}
+  .mute{stroke:#8c959f;fill:none}
+  .mutef{fill:#6e7781}
+  .acc{stroke:#c0602a;fill:none}
+  .accf{fill:#c0602a}
+  .skin{fill:#d0d7de}
+  text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:20px;paint-order:stroke;stroke:#ffffff;stroke-width:6px;stroke-linejoin:round}
+  .t{fill:#1f2328}
+  .s{fill:#6e7781;font-size:17px}
+  .h{fill:#1f2328;font-size:24px;font-weight:600}
+  @media (prefers-color-scheme: dark){
+    .ink{stroke:#d1d9e0}.inkf{fill:#d1d9e0}
+    .mute{stroke:#656c76}.mutef{fill:#9198a1}
+    .acc{stroke:#e07a3f}.accf{fill:#e07a3f}
+    .skin{fill:#3d444d}
+    .t,.h{fill:#d1d9e0}.s{fill:#9198a1}
+    text{stroke:#0d1117}
+  }
+</style>
+<defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter></defs>
+<text x="40" y="38" class="h">stroke</text>
+<text x="40" y="64" class="s">one drag</text>
+<rect x="40" y="78" width="210" height="210" class="mute" stroke-width="1"/>
+<path d="M65.2 208.2 L69.2 204.1 L73.2 200.0 L77.2 195.9 L81.2 191.9 L85.2 188.0 L89.1 184.2 L93.1 180.5 L97.1 177.0 L101.1 173.6 L105.1 170.4 L109.1 167.5 L113.1 164.7 L117.1 162.2 L121.1 160.0 L125.1 158.0 L129.0 156.2 L133.0 154.8 L137.0 153.7 L141.0 152.8 L145.0 152.3 L149.0 152.0 L153.0 152.1 L157.0 152.5 L161.0 153.3 L164.9 154.3 L168.9 155.6 L172.9 157.3 L176.9 159.2 L180.9 161.4 L184.9 163.9 L188.9 166.7 L192.9 169.7 L196.9 173.0 L200.9 176.5 L204.8 180.2 L208.8 184.1 L212.8 188.2 L216.8 192.5 L220.8 196.8 L224.8 201.3" class="ink" stroke-width="1.4" stroke-dasharray="5 5"/>
+<circle cx="224.8" cy="201.3" r="24" class="ink" stroke-width="1.4"/>
+<circle cx="224.8" cy="201.3" r="14" class="mute" stroke-width="1" stroke-dasharray="2 3"/>
+<text x="52" y="274" class="s">brush radius</text>
+<text x="290" y="38" class="h">length</text>
+<text x="290" y="64" class="s">map</text>
+<rect x="290" y="78" width="210" height="210" class="mute" stroke-width="1"/>
+<clipPath id="tile1"><rect x="290" y="78" width="210" height="210"/></clipPath>
+<path d="M315.2 208.2 L319.2 204.1 L323.2 200.0 L327.2 195.9 L331.2 191.9 L335.1 188.0 L339.1 184.2 L343.1 180.5 L347.1 177.0 L351.1 173.6 L355.1 170.4 L359.1 167.5 L363.1 164.7 L367.1 162.2 L371.1 160.0 L375.1 158.0 L379.0 156.2 L383.0 154.8 L387.0 153.7 L391.0 152.8 L395.0 152.3 L399.0 152.0 L403.0 152.1 L407.0 152.5 L411.0 153.3 L414.9 154.3 L418.9 155.6 L422.9 157.3 L426.9 159.2 L430.9 161.4 L434.9 163.9 L438.9 166.7 L442.9 169.7 L446.9 173.0 L450.9 176.5 L454.9 180.2 L458.8 184.1 L462.8 188.2 L466.8 192.5 L470.8 196.8 L474.8 201.3" class="ink" stroke-width="46" stroke-linecap="round" filter="url(#soft)" opacity="0.75" clip-path="url(#tile1)"/>
+<path d="M258 183.0 L282 183.0" class="mute" stroke-width="1"/>
+<text x="540" y="38" class="h">thickness</text>
+<text x="540" y="64" class="s">map</text>
+<rect x="540" y="78" width="210" height="210" class="mute" stroke-width="1"/>
+<clipPath id="tile2"><rect x="540" y="78" width="210" height="210"/></clipPath>
+<path d="M565.2 208.2 L569.2 204.1 L573.2 200.0 L577.2 195.9 L581.2 191.9 L585.1 188.0 L589.1 184.2 L593.1 180.5 L597.1 177.0 L601.1 173.6 L605.1 170.4 L609.1 167.5 L613.1 164.7 L617.1 162.2 L621.1 160.0 L625.0 158.0 L629.0 156.2 L633.0 154.8 L637.0 153.7 L641.0 152.8 L645.0 152.3 L649.0 152.0 L653.0 152.1 L657.0 152.5 L661.0 153.3 L665.0 154.3 L668.9 155.6 L672.9 157.3 L676.9 159.2 L680.9 161.4 L684.9 163.9 L688.9 166.7 L692.9 169.7 L696.9 173.0 L700.9 176.5 L704.9 180.2 L708.8 184.1 L712.8 188.2 L716.8 192.5 L720.8 196.8 L724.8 201.3" class="ink" stroke-width="24" stroke-linecap="round" filter="url(#soft)" opacity="0.5" clip-path="url(#tile2)"/>
+<path d="M508 183.0 L532 183.0" class="mute" stroke-width="1"/>
+<text x="790" y="38" class="h">colour</text>
+<text x="790" y="64" class="s">map</text>
+<rect x="790" y="78" width="210" height="210" class="mute" stroke-width="1"/>
+<clipPath id="tile3"><rect x="790" y="78" width="210" height="210"/></clipPath>
+<path d="M815.2 208.2 L819.2 204.1 L823.2 200.0 L827.2 195.9 L831.2 191.9 L835.1 188.0 L839.1 184.2 L843.1 180.5 L847.1 177.0 L851.1 173.6 L855.1 170.4 L859.1 167.5 L863.1 164.7 L867.1 162.2 L871.1 160.0 L875.0 158.0 L879.0 156.2 L883.0 154.8 L887.0 153.7 L891.0 152.8 L895.0 152.3 L899.0 152.0 L903.0 152.1 L907.0 152.5 L911.0 153.3 L915.0 154.3 L918.9 155.6 L922.9 157.3 L926.9 159.2 L930.9 161.4 L934.9 163.9 L938.9 166.7 L942.9 169.7 L946.9 173.0 L950.9 176.5 L954.9 180.2 L958.8 184.1 L962.8 188.2 L966.8 192.5 L970.8 196.8 L974.8 201.3" class="acc" stroke-width="40" stroke-linecap="round" filter="url(#soft)" opacity="0.9" clip-path="url(#tile3)"/>
+<path d="M758 183.0 L782 183.0" class="mute" stroke-width="1"/>
+<text x="1040" y="38" class="h">comb</text>
+<text x="1040" y="64" class="s">drag direction</text>
+<rect x="1040" y="78" width="210" height="210" class="mute" stroke-width="1"/>
+<path d="M1059.5 193.9 L1074.9 178.2" class="ink" stroke-width="1.4"/>
+<path d="M1073.5 185.3 L1074.9 178.2 L1067.8 179.7" class="ink" stroke-width="1.4"/>
+<path d="M1069.5 203.7 L1084.9 188.0" class="ink" stroke-width="1.4"/>
+<path d="M1083.5 195.1 L1084.9 188.0 L1077.8 189.5" class="ink" stroke-width="1.4"/>
+<path d="M1079.4 213.5 L1094.9 197.9" class="ink" stroke-width="1.4"/>
+<path d="M1093.5 204.9 L1094.9 197.9 L1087.8 199.3" class="ink" stroke-width="1.4"/>
+<path d="M1083.7 170.0 L1100.5 155.8" class="ink" stroke-width="1.4"/>
+<path d="M1098.5 162.7 L1100.5 155.8 L1093.4 156.6" class="ink" stroke-width="1.4"/>
+<path d="M1092.7 180.7 L1109.5 166.5" class="ink" stroke-width="1.4"/>
+<path d="M1107.5 173.5 L1109.5 166.5 L1102.4 167.3" class="ink" stroke-width="1.4"/>
+<path d="M1101.7 191.4 L1118.5 177.3" class="ink" stroke-width="1.4"/>
+<path d="M1116.5 184.2 L1118.5 177.3 L1111.4 178.0" class="ink" stroke-width="1.4"/>
+<path d="M1109.0 150.3 L1128.6 140.5" class="ink" stroke-width="1.4"/>
+<path d="M1125.1 146.8 L1128.6 140.5 L1121.5 139.6" class="ink" stroke-width="1.4"/>
+<path d="M1115.2 162.9 L1134.9 153.0" class="ink" stroke-width="1.4"/>
+<path d="M1131.3 159.3 L1134.9 153.0 L1127.7 152.1" class="ink" stroke-width="1.4"/>
+<path d="M1121.5 175.4 L1141.1 165.6" class="ink" stroke-width="1.4"/>
+<path d="M1137.6 171.8 L1141.1 165.6 L1134.0 164.7" class="ink" stroke-width="1.4"/>
+<path d="M1137.2 138.7 L1159.2 137.5" class="ink" stroke-width="1.4"/>
+<path d="M1153.4 141.8 L1159.2 137.5 L1153.0 133.8" class="ink" stroke-width="1.4"/>
+<path d="M1138.0 152.7 L1160.0 151.4" class="ink" stroke-width="1.4"/>
+<path d="M1154.2 155.8 L1160.0 151.4 L1153.8 147.8" class="ink" stroke-width="1.4"/>
+<path d="M1138.8 166.6 L1160.8 165.4" class="ink" stroke-width="1.4"/>
+<path d="M1155.0 169.7 L1160.8 165.4 L1154.5 161.8" class="ink" stroke-width="1.4"/>
+<path d="M1168.1 140.1 L1188.4 148.5" class="ink" stroke-width="1.4"/>
+<path d="M1181.4 149.9 L1188.4 148.5 L1184.4 142.5" class="ink" stroke-width="1.4"/>
+<path d="M1162.8 153.1 L1183.1 161.4" class="ink" stroke-width="1.4"/>
+<path d="M1176.0 162.9 L1183.1 161.4 L1179.1 155.5" class="ink" stroke-width="1.4"/>
+<path d="M1157.4 166.0 L1177.8 174.4" class="ink" stroke-width="1.4"/>
+<path d="M1170.7 175.8 L1177.8 174.4 L1173.8 168.4" class="ink" stroke-width="1.4"/>
+<path d="M1197.2 155.2 L1214.3 169.1" class="ink" stroke-width="1.4"/>
+<path d="M1207.1 168.4 L1214.3 169.1 L1212.1 162.3" class="ink" stroke-width="1.4"/>
+<path d="M1188.4 166.0 L1205.4 180.0" class="ink" stroke-width="1.4"/>
+<path d="M1198.2 179.3 L1205.4 180.0 L1203.3 173.1" class="ink" stroke-width="1.4"/>
+<path d="M1179.5 176.9 L1196.5 190.8" class="ink" stroke-width="1.4"/>
+<path d="M1189.3 190.1 L1196.5 190.8 L1194.4 183.9" class="ink" stroke-width="1.4"/>
+<path d="M1223.7 179.3 L1238.6 195.5" class="ink" stroke-width="1.4"/>
+<path d="M1231.6 193.8 L1238.6 195.5 L1237.5 188.4" class="ink" stroke-width="1.4"/>
+<path d="M1213.4 188.7 L1228.2 205.0" class="ink" stroke-width="1.4"/>
+<path d="M1221.2 203.2 L1228.2 205.0 L1227.1 197.8" class="ink" stroke-width="1.4"/>
+<path d="M1203.1 198.1 L1217.9 214.4" class="ink" stroke-width="1.4"/>
+<path d="M1210.9 212.7 L1217.9 214.4 L1216.8 207.3" class="ink" stroke-width="1.4"/>
+<path d="M1008 183.0 L1032 183.0" class="mute" stroke-width="1"/>
+</svg>
